@@ -1,9 +1,13 @@
-
-
 import React from "react";
 
 function NoteViewer({ note, onEdit }) {
-  if (!note) return <p className="instructions">Select a note.</p>;
+  if (!note) {
+    return (
+      <div className="instructions">
+        <p>Select a note from the sidebar to view or edit it.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="note-viewer">
