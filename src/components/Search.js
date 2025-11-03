@@ -1,5 +1,3 @@
-
-
 import React from "react";
 
 function Search({ filter, setFilter }) {
@@ -8,7 +6,7 @@ function Search({ filter, setFilter }) {
       <input
         id="search-bar"
         type="text"
-        placeholder="Search Notes"
+        placeholder="Search notes..."
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
         className="search-input"
@@ -18,4 +16,3 @@ function Search({ filter, setFilter }) {
 }
 
 export default Search;
-
