@@ -1,6 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client"; // React 18+
 import "./assets/css/brooke.css";
 import App from "./components/App";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+// Target root element
+const container = document.getElementById("root");
+const root = createRoot(container);
+
+// Render the App
+root.render(<App />);
