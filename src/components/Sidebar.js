@@ -1,29 +1,16 @@
-
-// import React from "react";
-// import NoteList from "./NoteList";
-
-// function Sidebar({ notes, onSelectNote, onAddNote }) {
-//   return (
-//     <div className="master-detail-element sidebar">
-//       <NoteList notes={notes} onSelectNote={onSelectNote} />
-//       <button onClick={onAddNote}>New</button>
-//     </div>
-//   );
-// }
-
-// export default Sidebar;
-
 import React from "react";
+import NoteItem from "./NoteItem";
 
-function Sidebar({ notes, onNoteClick, onNewNote, searchTerm, setSearchTerm }) {
-  // Filtè pa tit OU byen pa kontni (body)
-  const filteredNotes = notes.filter((note) =>
-    note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    note.body.toLowerCase().includes(searchTerm.toLowerCase()) // <-- Nouvo fonksyonalite a
+function Sidebar({ notes, onNoteClick, onNewNote, searchTerm, setSearchTerm, selectedNote }) {
+  // Filter notes by title OR body
+  const filteredNotes = notes.filter(
+    (note) =>
+      note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      note.body.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div className="sidebar">
+    <div className="sidebar master-detail-element">
       <button onClick={onNewNote}>New</button>
 
       <input
@@ -31,14 +18,17 @@ function Sidebar({ notes, onNoteClick, onNewNote, searchTerm, setSearchTerm }) {
         placeholder="Search notes..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-input"
       />
 
-      <ul>
+      <ul className="note-list">
         {filteredNotes.map((note) => (
-          <li key={note.id} onClick={() => onNoteClick(note.id)}>
-            <strong>{note.title}</strong>
-            <p>{note.body.slice(0, 20)}...</p>
-          </li>
+          <NoteItem
+            key={note.id}
+            note={note}
+            onClick={() => onNoteClick(note)}
+            isSelected={selectedNote?.id === note.id} // highlight selected note
+          />
         ))}
       </ul>
     </div>
